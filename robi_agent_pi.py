@@ -25,6 +25,7 @@ from robicore.providers.impl.tts_callable import CallableTtsProvider
 from robicore.providers.impl.llm_openai_chat import OpenAIChatLlmProvider
 from robicore.providers.impl.llm_ollama import OllamaLlmProvider
 from robicore.kernel import Kernel, KernelTimers
+from robicore.tasks import TaskEngine
 
 # Optional: Auto-VAD
 try:
@@ -396,6 +397,7 @@ class RobiApp:
 
         # Build services skeleton + connectivity monitor (offline-first caps)
         self.services, self.netmon = build_services_skeleton()
+        self.task_engine = TaskEngine(self.services)
 
         # Create providers / agents
         self.client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "")) if os.environ.get("OPENAI_API_KEY") else None
@@ -451,6 +453,7 @@ class RobiApp:
                 f"[Robi] network={online} | caps: {self.services.caps.summary()}",
                 flush=True
             ),
+            task_engine=self.task_engine,
         )
 
 
