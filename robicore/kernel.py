@@ -68,12 +68,14 @@ class Kernel:
                 pass
 
     def tick_15min(self) -> None:
-        print("[Kernel] 15-min tick → checking tasks / state", flush=True)
-        print(f"[Kernel] caps: {self.services.caps.summary()}", flush=True)
-
-        # NEW: task engine hook
+        ts = time.strftime("%Y-%m-%d %H:%M:%S")
+    
+        print(f"[{ts}] [Kernel] orchestrator tick", flush=True)
+        print(f"[{ts}] [Kernel] caps: {self.services.caps.summary()}", flush=True)
+    
+        # task engine hook
         if self.task_engine:
             try:
                 self.task_engine.tick(self.services)
             except Exception as e:
-                print(f"[Kernel] task_engine error: {e}", flush=True)
+                print(f"[{ts}] [Kernel] task_engine error: {e}", flush=True)

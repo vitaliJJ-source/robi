@@ -219,7 +219,7 @@ class TTSAgentOpenAI:
                     data = np.mean(data, axis=1).astype(np.float32)
                 if sr != PLAYBACK_SR:
                     data = resample_linear_mono(data, sr, PLAYBACK_SR)
-                sd.play(data, samplerate=PLAYBACK_SR, blocking=True)
+                    sd.play(data, samplerate=PLAYBACK_SR, blocking=True, latency="high")
             except Exception as e:
                 print(f"[TTS OpenAI] error: {e}", file=sys.stderr)
 
@@ -447,7 +447,7 @@ class RobiApp:
             timers=KernelTimers(
                 net_tick_sec=NET_TICK_SEC,
                 fast_tick_sec=0.25,
-                orchestrator_tick_sec=15 * 60
+                orchestrator_tick_sec=5 * 60
             ),
             on_net_change=lambda online: print(
                 f"[Robi] network={online} | caps: {self.services.caps.summary()}",
