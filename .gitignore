@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+robi-venv/
+venv/
+.venv/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs / runtime data
+*.log
+logs/
+robicore/logs/
+
+# Runtime memory/persona data
+robicore/CHARA.MD
+robicore/CHARA_RAW.MD
+robicore/CHARA_STATE.json
+robicore/CHARA_CONFLICT_LOG.MD
+robicore/LT_MEMORY.MD
+
+# Large local assets / models
+vosk-models/
+models/
+*.wav
+*.mp3
+*.zip
+
+# Secrets / env
+.env
+.env.*
